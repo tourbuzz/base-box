@@ -87,7 +87,7 @@
     }
   ],
   "variables": {
-    "chef_version": "provisionerless",
+    "chef_version": "11.8.2",
     "mirror": "http://mirrors.kernel.org/centos"
   }
 }
