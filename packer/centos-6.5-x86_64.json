@@ -1,4 +1,8 @@
 {
+  "variables": {
+    "chef_version": "11.8.2",
+    "mirror": "http://mirrors.kernel.org/centos"
+  },
   "builders": [
     {
       "boot_command": [
@@ -35,12 +39,20 @@
       ],
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "tourbuzz_x86_64_centos_6.5"
-    }
-  ],
-  "post-processors": [
+    },
     {
-      "output": "../builds/{{.Provider}}/opscode_centos-6.5_chef-{{user `chef_version`}}.box",
-      "type": "vagrant"
+      "type": "amazon-ebs",
+      "region": "us-east-1",
+      "source_ami": "ami-eb6b0182",
+      "instance_type": "c1.medium",
+      "ssh_username": "root",
+      "ssh_timeout": "5m",
+      "ami_name": "centos-6.5 x86_64 via packer {{timestamp}}",
+      "ami_description": "Tourbuzz CentOS 6.5 Base Box",
+      "tags": {
+          "OS_Version": "CentOS",
+          "Release": "6.5"
+      }
     }
   ],
   "provisioners": [
@@ -60,9 +72,12 @@
       "type": "shell"
     }
   ],
-  "variables": {
-    "chef_version": "11.8.2",
-    "mirror": "http://mirrors.kernel.org/centos"
-  }
+  "post-processors": [
+    {
+      "output": "../builds/{{.Provider}}/opscode_centos-6.5_chef-{{user `chef_version`}}.box",
+      "type": "vagrant",
+      "only": ["virtualbox-iso"]
+    }
+  ]
 }
 
