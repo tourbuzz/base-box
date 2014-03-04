@@ -19,6 +19,7 @@
       "iso_url": "{{user `mirror`}}/6.5/isos/x86_64/CentOS-6.5-x86_64-bin-DVD1.iso",
       "output_directory": "tourbuzz_x86_64_centos_6.5",
       "shutdown_command": "echo 'vagrant'|sudo -S /sbin/halt -h -p",
+      "shutdown_timeout": "5m",
       "ssh_password": "vagrant",
       "ssh_port": 22,
       "ssh_username": "vagrant",
@@ -66,6 +67,9 @@
         "scripts/common/vagrant.sh",
         "scripts/common/vmtools.sh",
         "scripts/common/chef.sh",
+        "scripts/common/chef-user.sh",
+        "scripts/common/packages.sh",
+        "scripts/common/sudoers.sh",
         "scripts/centos/cleanup.sh",
         "scripts/common/minimize.sh"
       ],
