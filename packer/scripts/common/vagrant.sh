@@ -1,5 +1,23 @@
 #!/bin/bash
 
+echo "Ensure a vagrant group exists"
+id vagrant > /dev/null 2>&1
+OUT=$?
+if [ $OUT -ne 0 ]; then
+    echo "Adding vagrant group..."
+    # achieves parity with ./http/centos-6.5/ks.cfg for images that didn't using our Kickstart script... (amazon base CentOS ami)
+    groupadd vagrant -g 999
+fi
+
+echo "Ensure a vagrant user exists"
+id vagrant > /dev/null 2>&1
+OUT=$?
+if [ $OUT -ne 0 ]; then
+    echo "Adding vagrant user..."
+    # achieves parity with ./http/centos-6.5/ks.cfg for images that didn't using our Kickstart script... (amazon base CentOS ami)
+    useradd vagrant -g vagrant -G wheel -u 900
+fi
+
 echo "Installing public key for vagrant"
 mkdir /home/vagrant/.ssh
 
