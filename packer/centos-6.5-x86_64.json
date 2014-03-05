@@ -64,6 +64,7 @@
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "scripts": [
         "scripts/common/packages.sh",
+        "scripts/common/selinux.sh",
         "scripts/common/sshd.sh",
         "scripts/common/vmtools.sh",
         "scripts/common/vagrant.sh",
